@@ -4,11 +4,17 @@
     font-family: 'SEGA LOGO FONT';
     font-style: normal;
     font-weight: normal;
-    src: local('SEGA LOGO FONT'), url('SEGA.woff') format('woff');
+    src: local('SEGA LOGO FONT'), 
+         url('SEGA.woff') format('woff'),
 }
 
+/* Apply the custom font to h1 elements */
 h1 {
-    font-family: 'SEGA LOGO FONT';
+    font-family: 'SEGA LOGO FONT', Arial, sans-serif; /* Fallback fonts */
     font-weight: 200;
     color: #0ccac4;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add subtle text shadow */
+    margin-bottom: 20px; /* Add spacing below the heading */
+    line-height: 1.2; /* Improve line height for better readability */
+    text-align: center; /* Center-align the heading */
 }
