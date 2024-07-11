@@ -16,12 +16,19 @@ const CardContainer = styled.div`
   &:hover {
     transform: scale(1.05);
   }
+
+
+  @media (max-width: 450px) {
+    width: 100%; 
+    // border: 5px solid black;
+    margin: 15px 0px 15px 0px;
+  }
 `;
 
 const RobotImage = styled.img`
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
 `;
 
 const Card = ({ username, id }) => {

@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const ScrollContainer = styled.div`
+  max-width: 1200px; /* Adjust max-width as needed */
+  margin: 0 auto; /* Center container horizontally */
   overflow-x: hidden;
   overflow-y: scroll;
   border-radius: 10px;
@@ -17,6 +19,10 @@ const ScrollContainer = styled.div`
   
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+
+  @media (max-width: 768px) {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
 `;
 
 const Scroll = ({ children }) => {
