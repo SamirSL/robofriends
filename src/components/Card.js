@@ -1,52 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const CardContainer = styled.div`
   text-align: center;
-  background-color: #d4edda; /* light-green */
+  background-color: #c5f4da; /* Light green background */
   display: inline-block;
   border-radius: 15px;
   padding: 20px;
   margin: 15px;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
   }
 `;
 
 const RobotImage = styled.img`
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  margin-bottom: 20px;
+  width: 200px;
+  height: 200px;
 `;
 
-const CardContent = styled.div`
-  h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-  }
+const Card = ({ username, id }) => {
+  const [expanded, setExpanded] = useState(false);
+  const [details, setDetails] = useState(null);
 
-  p {
-    margin: 5px 0;
-    font-size: 1em;
-  }
-`;
+  const handleClick = () => {
+    if (!expanded) {
+      fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+        .then(response => response.json())
+        .then(data => {
+          setDetails(data);
+          setExpanded(true);
+        })
+        .catch(error => {
+          console.error('Error fetching user details:', error);
+        });
+    } else {
+      setExpanded(false);
+    }
+  };
 
-const Card = ({ name, username, email, id }) => {
   return (
-    <CardContainer>
-      <RobotImage src={`https://robohash.org/${id}?200x200`} alt="robots" />
-      <CardContent>
-        <h2>{name}</h2>
-        <p>{username}</p>
-        <p>{email}</p>
-      </CardContent>
+    <CardContainer onClick={handleClick}>
+      <RobotImage src={`https://robohash.org/${id}?size=200x200`} alt="robot" />
+      <div>
+        <h2>{username}</h2>
+        {expanded && details && (
+          <div>
+            <p><strong>Name:</strong> {details.name}</p>
+            <p><strong>Email:</strong> {details.email}</p>
+            <p><strong>Address:</strong> {details.address.street}, {details.address.city}</p>
+            <p><strong>About Me:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        )}
+      </div>
     </CardContainer>
   );
-}
+};
 
 export default Card;

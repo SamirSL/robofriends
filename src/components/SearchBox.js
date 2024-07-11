@@ -1,41 +1,31 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-const SearchContainer = styled.div`
-  padding: 16px;
-  display: flex;
-  justify-content: center;
-`;
-
-const SearchInput = styled.input`
-  padding: 12px;
-  border: 2px solid #4CAF50; /* Green */
-  border-radius: 25px;
+const Input = styled.input`
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background-color: #f0f0f0;
+  font-size: 1em;
   outline: none;
-  width: 300px;
-  font-size: 16px;
-  transition: width 0.3s ease-in-out;
-
+  width: 100%;
+  box-sizing: border-box;
+  
   &:focus {
-    width: 350px;
-    border-color: #45a049;
-  }
-
-  &::placeholder {
-    color: #9E9E9E; /* Grey */
+    border-bottom: 2px solid #0ccac4;
   }
 `;
 
-const SearchBox = ({ searchfield, searchChange }) => {
-  return (
-    <SearchContainer>
-      <SearchInput
-        type="search"
-        placeholder="Search robots..."
-        onChange={searchChange}
-      />
-    </SearchContainer>
-  );
-}
+const SearchBox = ({ searchChange }) => {
+    return (
+        <div className="pa2">
+            <Input
+                type="search"
+                placeholder="search robots"
+                onChange={searchChange}
+            />
+        </div>
+    );
+};
 
 export default SearchBox;

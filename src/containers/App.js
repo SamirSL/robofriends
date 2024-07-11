@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
-import ErrorBoundary from '../components/ErrorBoundry'; // Corrected spelling
+import ErrorBoundry from '../components/ErrorBoundry';
 import './App.css';
 
 const App = () => {
@@ -12,9 +12,8 @@ const App = () => {
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
-            .then(users => setRobots(users))
-            .catch(error => console.error('Error fetching robots:', error));
-    }, []); // Empty dependency array ensures this effect runs only once after the initial render
+            .then(users => setRobots(users));
+    }, []);
 
     const onSearchChange = (event) => {
         setSearchfield(event.target.value);
@@ -25,16 +24,20 @@ const App = () => {
     });
 
     return !robots.length ? (
-        <h1 className='tc f1'>Loading</h1> // Center align and apply f1 class for large font
+        <h1>Loading</h1>
     ) : (
-        <div className='tc'>
+        <div className='app-wrapper tc'>
             <h1 className='f1'>RoboFriends</h1>
-            <SearchBox searchChange={onSearchChange} />
-            <Scroll>
-                <ErrorBoundary> {/* Corrected component name */}
-                    <CardList robots={filteredRobots} />
-                </ErrorBoundary>
-            </Scroll>
+            <div className='scroll-area-1'>
+                <SearchBox searchChange={onSearchChange} />
+            </div>
+            <div className='scroll-area-2'>
+                <ErrorBoundry>
+                    <Scroll>
+                        <CardList robots={filteredRobots} />
+                    </Scroll>
+                </ErrorBoundry>
+            </div>
         </div>
     );
 };
