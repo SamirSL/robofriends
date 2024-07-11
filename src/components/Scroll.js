@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const ScrollContainer = styled.div`
+  overflow-x: hidden;
   overflow-y: scroll;
   border-radius: 10px;
   padding: 20px;
